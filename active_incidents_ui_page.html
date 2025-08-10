@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Active Incidents</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Active Incidents</h2>
+    <table id="incident-table">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Short Description</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            <script>
+                var gr = new GlideRecord('incident');
+                gr.addQuery('active', true);
+                gr.query();
+                while (gr.next()) {
+                    var row = '<tr>';
+                    row += '<td>' + gr.number + '</td>';
+                    row += '<td>' + gr.short_description + '</td>';
+                    row += '<td>' + gr.category + '</td>';
+                    row += '<td>' + gr.subcategory + '</td>';
+                    row += '<td>' + gr.state.getDisplayValue() + '</td>';
+                    row += '</tr>';
+                    document.getElementById('incident-table').tBodies[0].innerHTML += row;
+                }
+            </script>
+        </tbody>
+    </table>
+</body>
+</html>
