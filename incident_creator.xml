@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script_include name="incident_creator">
+    <function name="incident_creation" implements="incident_creation">
+        <documentation>Fetches active incidents and returns them in JSON format</documentation>
+        <parameta type="GlideRecord" name="incidents" direction="return"/>
+    </function>
+    <function name="incident_creation" access="public">
+        <![CDATA[
+            var incident = new GlideRecord('incident');
+            incident.addQuery('active', true);
+            incident.query();
+            var incidents = [];
+            while (incident.next()) {
+                var incidentData = {};
+                incidentData.number = incident.getValue('number');
+                incidentData.short_description = incident.getValue('short_description');
+                incidentData.description = incident.getValue('description');
+                incidents.push(incidentData);
+            }
+            var json = new JSON();
+            json.fromJSON(incidents);
+            return json;
+        ]]>
+    </function>
+</script_include>
