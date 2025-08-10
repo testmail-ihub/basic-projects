@@ -29,23 +29,27 @@
                 <th>State</th>
             </tr>
         </thead>
-        <tbody>
-            <script>
-                var gr = new GlideRecord('incident');
-                gr.addQuery('active', true);
-                gr.query();
-                while (gr.next()) {
-                    var row = '<tr>';
-                    row += '<td>' + gr.number + '</td>';
-                    row += '<td>' + gr.short_description + '</td>';
-                    row += '<td>' + gr.category + '</td>';
-                    row += '<td>' + gr.subcategory + '</td>';
-                    row += '<td>' + gr.state.getDisplayValue() + '</td>';
-                    row += '</tr>';
-                    document.getElementById('incident-table').tBodies[0].innerHTML += row;
-                }
-            </script>
+        <tbody id="incident-table-body">
         </tbody>
     </table>
+    <script>
+        var ga = new GlideAjax('incident_creator');
+        ga.addParam('sysparm_name', 'incident_creation');
+        ga.getXMLAnswer(function(answer) {
+            var incidents = JSON.parse(answer);
+            var tableBody = document.getElementById('incident-table-body');
+            incidents.forEach(incident => {
+                var row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${incident.number}</td>
+                    <td>${incident.short_description}</td>
+                    <td>${incident.category}</td>
+                    <td>${incident.subcategory}</td>
+                    <td>${incident.state}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        });
+    </script>
 </body>
 </html>
