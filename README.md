@@ -1,2 +1,2 @@
 # basic-projects
-basic projects / single page applications
+single page applications
