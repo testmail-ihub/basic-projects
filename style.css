@@ -1,0 +1,82 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 20px;
+}
+
+.header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Transaction List */
+.transaction-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.transaction:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.transaction:nth-child(even) {
+    background-color: #e9e9e9;
+}
+
+.transaction.income {
+    color: #2ecc71;
+}
+
+.transaction.expense {
+    color: #e74c3c;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        margin: 0;
+    }
+
+    .header {
+        font-size: 20px;
+    }
+
+    .transaction {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
